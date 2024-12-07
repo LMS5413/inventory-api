@@ -1,5 +1,6 @@
 package com.henryfabio.minecraft.inventoryapi.item.util;
 
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -11,9 +12,7 @@ public final class MaterialUtil {
         try {
             return new ItemStack(Material.getMaterial(materialName), 1, (short) damage);
         } catch (Exception error) {
-            final Material material = Material.valueOf("LEGACY_" + materialName);
-
-            return new ItemStack(material, 1, (short) damage);
+            return XMaterial.matchXMaterial("LEGACY_" + materialName).map(XMaterial::parseItem).orElse(null);
         }
     }
 
