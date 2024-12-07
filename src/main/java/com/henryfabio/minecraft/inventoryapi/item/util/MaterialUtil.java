@@ -13,7 +13,7 @@ public final class MaterialUtil {
         } catch (Exception error) {
             final Material material = Material.valueOf("LEGACY_" + materialName);
 
-            return new ItemStack(Bukkit.getUnsafe().fromLegacy(new MaterialData(material, (byte) damage)));
+            return new ItemStack(material, 1, (short) damage);
         }
     }
 

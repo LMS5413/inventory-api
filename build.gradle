@@ -1,17 +1,20 @@
-import org.apache.tools.ant.filters.ReplaceTokens
-
-apply plugin: 'java'
-apply plugin: 'java-library'
-apply plugin: 'com.github.johnrengelman.shadow'
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'java'
+}
 
 group = 'com.henryfabio'
 version = '2.0.3-SNAPSHOT'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
 
-compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 repositories {
     mavenCentral()
@@ -21,11 +24,11 @@ repositories {
 }
 
 dependencies {
-    def spigot = 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+    def spigot = 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
     compileOnly spigot
     testCompileOnly spigot
 
-    api 'org.jetbrains:annotations:22.0.0'
+    implementation 'org.jetbrains:annotations:22.0.0'
 
     def lombok = 'org.projectlombok:lombok:1.18.20'
     compileOnly lombok
@@ -35,30 +38,10 @@ dependencies {
     testAnnotationProcessor lombok
 }
 
-processResources {
-    from(sourceSets.main.resources.srcDirs) {
-        filter ReplaceTokens, tokens: [version: version]
+tasks {
+    shadowJar {
+        archiveBaseName.set('inventory-api')
+        archiveVersion.set('2.0.3-SNAPSHOT')
+        archiveClassifier.set('')
     }
-}
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
-    }
-}
-
-def defaultJarName = project.name + '-' + project.version
-
-shadowJar {
-    archiveName("${defaultJarName}.jar")
-}
-tasks.build.dependsOn shadowJar
-
-task buildTest(type: Jar) {
-    from sourceSets.main.output
-    from sourceSets.test.output
 }
