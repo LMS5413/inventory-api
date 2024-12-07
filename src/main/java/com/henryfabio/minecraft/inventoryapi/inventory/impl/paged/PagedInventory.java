@@ -29,7 +29,7 @@ public abstract class PagedInventory extends CustomInventoryImpl {
     }
 
     @Override
-    public final void updateInventory(@NotNull Player player) {
+    public void updateInventory(@NotNull Player player) {
         super.updateInventory(player);
     }
 
@@ -47,7 +47,7 @@ public abstract class PagedInventory extends CustomInventoryImpl {
     }
 
     @Override
-    protected final void update(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
+    protected void update(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
         PagedViewer pagedViewer = (PagedViewer) viewer;
         this.update(pagedViewer, editor);
 
