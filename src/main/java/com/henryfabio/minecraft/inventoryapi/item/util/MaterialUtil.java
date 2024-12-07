@@ -12,7 +12,7 @@ public final class MaterialUtil {
         try {
             return new ItemStack(Material.getMaterial(materialName), 1, (short) damage);
         } catch (Exception error) {
-            return XMaterial.matchXMaterial("LEGACY_" + materialName).map(XMaterial::parseItem).orElse(null);
+            return XMaterial.matchXMaterial(materialName).map(XMaterial::parseItem).orElse(null);
         }
     }
 
