@@ -26,8 +26,6 @@ public final class PagedViewer extends ViewerImpl {
 
     private final List<InventoryItemSupplier> pageItemList = new LinkedList<>();
     private int currentPage = 1;
-    private InventoryItem nextPageItem;
-    private InventoryItem previousPageItem;
 
     public PagedViewer(String name, CustomInventory customInventory) {
         super(name, customInventory, new ViewerConfigurationImpl.Paged());
@@ -85,11 +83,11 @@ public final class PagedViewer extends ViewerImpl {
 
             editor.setItem(
                     configuration.nextPageSlot(),
-                    this.hasNextPage() ? (nextPageItem != null ? nextPageItem.defaultCallback((viewer) -> {this.nextPage();}) : DefaultItem.NEXT_PAGE.toInventoryItem(this)) : null
+                    this.hasNextPage() ? (configuration.nextPageItem() != null ? configuration.nextPageItem().defaultCallback((viewer) -> {this.nextPage();}) : DefaultItem.NEXT_PAGE.toInventoryItem(this)) : null
             );
             editor.setItem(
                     configuration.previousPageSlot(),
-                    this.hasPreviousPage() ? (previousPageItem != null ? previousPageItem.defaultCallback((viewer) -> {this.previousPage();}) : DefaultItem.PREVIOUS_PAGE.toInventoryItem(this)) : null
+                    this.hasPreviousPage() ? (configuration.previousPageItem() != null ? configuration.previousPageItem().defaultCallback((viewer) -> {this.previousPage();}) : DefaultItem.PREVIOUS_PAGE.toInventoryItem(this)) : null
             );
         }
     }

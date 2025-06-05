@@ -1,11 +1,15 @@
 package com.henryfabio.minecraft.inventoryapi.viewer.configuration.impl;
 
+import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.ViewerConfiguration;
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.border.Border;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Henry Fábio
@@ -33,6 +37,10 @@ public abstract class ViewerConfigurationImpl implements ViewerConfiguration {
         private int nextPageSlot;
         private int previousPageSlot;
         private int emptyPageSlot;
+        @Nullable
+        private InventoryItem nextPageItem;
+        @Nullable
+        private InventoryItem previousPageItem;
 
     }
 
