@@ -62,7 +62,7 @@ public final class PagedViewer extends ViewerImpl {
         if (this.pageItemList.isEmpty()) {
             InventoryItem emptyInventoryItem = InventoryItem.of(new ItemStack(Material.AIR));
             editor.fillCenter(emptyInventoryItem, border);
-            editor.setItem(configuration.emptyPageSlot(), DefaultItem.EMPTY.toInventoryItem());
+            editor.setItem(configuration.emptyPageSlot(), configuration.emptyPageItem() != null ? configuration.emptyPageItem() : DefaultItem.EMPTY.toInventoryItem(this));
 
         } else {
             List<InventoryItem> inventoryItems = new LinkedList<>();

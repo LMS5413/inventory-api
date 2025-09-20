@@ -41,6 +41,8 @@ public abstract class ViewerConfigurationImpl implements ViewerConfiguration {
         private InventoryItem nextPageItem;
         @Nullable
         private InventoryItem previousPageItem;
+        @Nullable
+        private InventoryItem emptyPageItem;
 
     }
 
